@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>Wedding - Art Blue Java</title>
+
+    <!-- CSS Eksternal -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://assets.satumomen.com/build/assets/bootstrap-vCaDZZbr.css">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+        @import url('https://nkundangan.com/fonts/javassoul/style.css');
+        @import url('https://nkundangan.com/fonts/laraboyok/style.css');
+        @import url('https://nkundangan.com/fonts/photograph_signature/fonts.css');
+
+        :root {
+            --inv-bg: #f7f7f7;
+            --inv-base: #49312b;
+            --inv-accent: #b88821;
+            --inv-border: #f4ecdd;
+            --font-base: "Work Sans", sans-serif;
+            --font-accent: 'Laraboyok', serif;
+            --font-latin: 'Javassoul', serif;
+            --font-great-vibes: 'Great Vibes', cursive;
+        }
+
+        .font-great-vibes {
+            font-family: var(--font-great-vibes) !important;
+        }
+
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #d0d8e8;
+            /* Warna luar frame */
+            font-family: var(--font-base);
+            color: var(--inv-base);
+            overflow-x: hidden;
+        }
+
+        .color-accent {
+            color: var(--inv-accent);
+        }
+
+        .font-latin {
+            font-family: var(--font-latin);
+        }
+
+        .font-accent {
+            font-family: var(--font-accent);
+        }
+
+        .font-photograph-signature {
+            font-family: 'Photograph Signature';
+        }
+
+        /* Container Mobile (Max 480px width to look like phone) */
+        .app-container {
+            position: relative;
+            max-width: 440px;
+            margin: 0 auto;
+            height: 100dvh;
+            background-color: var(--inv-bg);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('https://nkundangan.com/themes/art-blue-java/bg.webp');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1;
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+        }
+
+        .slide.hidden {
+            opacity: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Animations for frames */
+        @keyframes wave-left {
+            0% {
+                transform: rotate(-10deg);
+            }
+
+            100% {
+                transform: rotate(4deg);
+            }
+        }
+
+        @keyframes wave-right {
+            0% {
+                transform: rotate(10deg);
+            }
+
+            100% {
+                transform: rotate(-4deg);
+            }
+        }
+
+        .animate-left img {
+            animation: wave-left 5s ease-in-out infinite alternate;
+        }
+
+        .animate-right img {
+            animation: wave-right 5s ease-in-out infinite alternate;
+        }
+
+        /* The Frame Box */
+        .frame {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .frame::after {
+            content: "";
+            position: absolute;
+            left: 24px;
+            right: 24px;
+            top: 24px;
+            bottom: 24px;
+            background-color: rgb(249 249 249 / 64%);
+            border: 2px solid var(--inv-border);
+            border-radius: 1rem;
+            backdrop-filter: blur(2px);
+        }
+
+        .cover-page .frame::after {
+            display: none;
+        }
+
+        .frame img {
+            position: absolute;
+        }
+
+        /* Fix: animate-left/right need width so child w-100 images resolve correctly */
+        .frame .animate-left,
+        .frame .animate-right {
+            position: absolute;
+            width: 100%;
+        }
+
+        /* Positions - DIV wrappers also need position absolute to anchor to corners */
+        .frame-tl {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 45%;
+        }
+
+        .frame-tr {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 45%;
+        }
+
+        .frame-bl {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 45%;
+        }
+
+        .frame-br {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 45%;
+        }
+
+        .w-100 {
+            width: 100%;
+        }
+
+        .content-inner {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            padding: 20px;
+            width: 100%;
+        }
+
+        /* Cover Specific Elements */
+        .btn-open {
+            background-color: var(--inv-base);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 10px 30px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-open:hover {
+            background-color: var(--inv-accent);
+        }
+
+        .bottom-nav {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #265875;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            z-index: 50;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+
+        .bottom-nav.hidden {
+            display: none !important;
+        }
+
+        .nav-btn {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 12px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .nav-btn.active {
+            color: white;
+        }
+
+        .nav-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="app-container">
+
+        <!-- ================= COVER PAGE ================= -->
+        <div id="slide-cover" class="slide cover-page">
+            <div class="frame">
+                <img class="frame-tl animate__animated animate__fadeInTopLeft animate__slower"
+                    src="https://nkundangan.com/themes/art-blue-java/tl.webp" alt="frame">
+                <img class="frame-tr animate__animated animate__fadeInTopRight animate__slower"
+                    src="https://nkundangan.com/themes/art-blue-java/tr.webp" alt="frame">
+
+                <div class="frame-tl w-100" style="transform: scale(1.2); transform-origin: top center;">
+                    <img class="w-100 animate__animated animate__zoomIn animate__slower"
+                        src="https://nkundangan.com/themes/art-blue-java/gunungan.webp" alt="frame"
+                        style="animation-delay: 1.5s;">
+                </div>
+
+                <div class="frame-tl animate__animated animate__fadeInLeft animate__slow"
+                    style="top: 38%; transform: translateY(-60%); z-index: 1; width: 60%;">
+                    <div class="animate-left" style="transform: translate(-15%, 0);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/tl-2.webp" alt="daun"
+                            style="transform-origin: center left; animation-delay: 120ms;">
+                    </div>
+                </div>
+                <!-- bl-1 in front of blur bg (cover) -->
+                <div class="frame-tl animate__animated animate__fadeInBottomLeft animate__slow"
+                    style="top: 52%; z-index: 3; animation-delay: 0.3s;">
+                    <div class="animate-left" style="transform: translate(0%, 50%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/bl-1.webp" alt="ornament"
+                            style="transform-origin: bottom left; animation-delay: 150ms;">
+                    </div>
+                </div>
+                <!-- Sinta below tl-2 -->
+                <div class="frame-tl animate__animated animate__fadeInBottomLeft animate__slow"
+                    style="top: 52%; z-index: 1; animation-delay: 0.5s;">
+                    <div class="animate-left" style="transform: translate(-20%, 50%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/sinta.webp"
+                            alt="wayang sinta" style="transform-origin: bottom left; animation-delay: 200ms;">
+                    </div>
+                </div>
+                <!-- bl-3 below sinta -->
+                <div class="frame-tl animate__animated animate__fadeInBottomLeft animate__slow"
+                    style="top: 60%; z-index: 4; animation-delay: 0.7s;">
+                    <div class="animate-left" style="transform: translate(-10%, 120%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/bl-3.webp" alt="bunga"
+                            style="transform-origin: bottom left; animation-delay: 300ms;">
+                    </div>
+                </div>
+                <div class="frame-tr animate__animated animate__fadeInRight animate__slow"
+                    style="top: 38%; transform: translateY(-60%); z-index: 1; width: 60%;">
+                    <div class="animate-right" style="transform: translate(15%, 0);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/tr-2.webp" alt="daun"
+                            style="transform-origin: center right; animation-delay: 120ms;">
+                    </div>
+                </div>
+                <!-- br-1 in front of blur bg (cover) -->
+                <div class="frame-tr animate__animated animate__fadeInBottomRight animate__slow"
+                    style="top: 52%; z-index: 3; animation-delay: 0.3s;">
+                    <div class="animate-right" style="transform: translate(0%, 50%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/br-1.webp" alt="ornament"
+                            style="transform-origin: bottom right; animation-delay: 150ms;">
+                    </div>
+                </div>
+                <!-- Rama below tr-2 -->
+                <div class="frame-tr animate__animated animate__fadeInBottomRight animate__slow"
+                    style="top: 52%; z-index: 1; animation-delay: 0.5s;">
+                    <div class="animate-right" style="transform: translate(20%, 50%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/rama.webp" alt="wayang rama"
+                            style="transform-origin: bottom right; animation-delay: 200ms;">
+                    </div>
+                </div>
+                <!-- br-3 below rama -->
+                <div class="frame-tr animate__animated animate__fadeInBottomRight animate__slow"
+                    style="top: 60%; z-index: 4; animation-delay: 0.7s;">
+                    <div class="animate-right" style="transform: translate(10%, 120%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/br-3.webp" alt="bunga"
+                            style="transform-origin: bottom right; animation-delay: 300ms;">
+                    </div>
+                </div>
+
+                <!-- Bottom Wayang -->
+                <div class="frame-bl animate__animated animate__fadeInBottomLeft animate__slow"
+                    style="animation-delay: 2.5s;">
+                    <div class="animate-left" style="transform: translate(-29%, -85%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/bl-1.webp" alt="frame"
+                            style="transform-origin: bottom left;">
+                    </div>
+                </div>
+                <div class="frame-bl animate__animated animate__fadeInBottomLeft animate__slow"
+                    style="animation-delay: 2.2s;">
+                    <div class="animate-left" style="transform: translate(-27%, -87%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/sinta.webp" alt="frame"
+                            style="transform-origin: bottom left; animation-delay: 100ms;">
+                    </div>
+                </div>
+                <div class="frame-bl animate__animated animate__fadeInBottomLeft animate__slow"
+                    style="animation-delay: 2s; z-index: 4;">
+                    <div class="animate-left" style="transform: translate(-16%, -70%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/bl-3.webp" alt="frame"
+                            style="transform-origin: bottom left; animation-delay: 300ms;">
+                    </div>
+                </div>
+
+                <div class="frame-br animate__animated animate__fadeInBottomRight animate__slow"
+                    style="animation-delay: 2.5s;">
+                    <div class="animate-right" style="transform: translate(29%, -85%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/br-1.webp" alt="frame"
+                            style="transform-origin: bottom right;">
+                    </div>
+                </div>
+                <div class="frame-br animate__animated animate__fadeInBottomRight animate__slow"
+                    style="animation-delay: 2.2s;">
+                    <div class="animate-right" style="transform: translate(27%, -87%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/rama.webp" alt="frame"
+                            style="transform-origin: bottom right; animation-delay: 100ms;">
+                    </div>
+                </div>
+                <div class="frame-br animate__animated animate__fadeInBottomRight animate__slow"
+                    style="animation-delay: 2s; z-index: 4;">
+                    <div class="animate-right" style="transform: translate(16%, -70%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/br-3.webp" alt="frame"
+                            style="transform-origin: bottom right; animation-delay: 300ms;">
+                    </div>
+                </div>
+
+                <img class="frame-br w-100 animate__animated animate__fadeInUp animate__slower"
+                    src="https://nkundangan.com/themes/art-blue-java/bm.webp" alt="frame" style="animation-delay: 1s;">
+                <img class="frame-bl animate__animated animate__fadeInLeft animate__slower"
+                    src="https://nkundangan.com/themes/art-blue-java/bl-2.webp" alt="frame" style="z-index: 4; ">
+                <img class="frame-br animate__animated animate__fadeInRight animate__slower"
+                    src="https://nkundangan.com/themes/art-blue-java/br-2.webp" alt="frame" style="z-index: 4; ">
+            </div>
+
+            <div class="content-inner pt-5" style="margin-top: -60px;">
+                <div class="text-center animate__animated animate__zoomIn animate__slower mb-3" style="line-height:1;">
+                    <div class="mb-2" style="font-size:14px;">The Wedding Of</div>
+                    <div class="color-accent font-latin" style="font-size:80px;">Juli</div>
+                    <div class="font-latin mb-2" style="font-size:30px;">&amp;</div>
+                    <div class="color-accent mb-2 font-latin" style="font-size:80px;">Tyo</div>
+                </div>
+                <div class="text-center mx-auto" style="max-width:280px; margin-top: 40px;">
+                    <div class="text-center mb-3 py-3 px-2 animate__animated animate__zoomIn animate__slower"
+                        style="background-color:rgb(225 219 203 / 67%);border:2px solid var(--inv-border);border-radius:.5rem;">
+                        <div class="mb-1 animate__animated animate__fadeInUp animate__slower" style="font-size:14px;">
+                            Kepada Yth;<br />Bapak/Ibu/Saudara/i</div>
+                        <div class="color-accent h5 font-weight-bold mb-1 animate__animated animate__fadeInUp animate__slower"
+                            style="font-size:16px;" id="guestNameDisplay">Nama Tamu</div>
+                    </div>
+                    <button onclick="openInvitation()"
+                        class="btn-open animate__animated animate__fadeInUp animate__slow">Open Invitation</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= GREETING PAGE ================= -->
+        <div id="slide-1" class="slide hidden">
+            <!-- Reuse standard frame borders without the bottom characters for inner pages -->
+            <div class="frame">
+                <img class="frame-tl animate__animated animate__fadeInTopLeft animate__slower"
+                    src="https://nkundangan.com/themes/art-blue-java/tl.webp" alt="frame">
+                <img class="frame-tr animate__animated animate__fadeInTopRight animate__slower"
+                    src="https://nkundangan.com/themes/art-blue-java/tr.webp" alt="frame">
+                <!-- Daun (Leaves) -->
+                <div class="frame-tl animate__animated animate__fadeInLeft animate__slow"
+                    style="top: 38%; transform: translateY(-60%); z-index: 1; width: 60%;">
+                    <div class="animate-left" style="transform: translate(-15%, 0);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/tl-2.webp" alt="daun"
+                            style="transform-origin: center left; animation-delay: 120ms;">
+                    </div>
+                </div>
+                <!-- bl-1 in front of blur bg (opening) -->
+                <div class="frame-tl animate__animated animate__fadeInBottomLeft animate__slow"
+                    style="top: 52%; z-index: 3; animation-delay: 0.3s;">
+                    <div class="animate-left" style="transform: translate(0%, 50%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/bl-1.webp" alt="ornament"
+                            style="transform-origin: bottom left; animation-delay: 150ms;">
+                    </div>
+                </div>
+                <!-- Sinta below tl-2 on opening page -->
+                <div class="frame-tl animate__animated animate__fadeInBottomLeft animate__slow"
+                    style="top: 52%; z-index: 1; animation-delay: 0.5s;">
+                    <div class="animate-left" style="transform: translate(-20%, 50%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/sinta.webp"
+                            alt="wayang sinta" style="transform-origin: bottom left; animation-delay: 100ms;">
+                    </div>
+                </div>
+                <!-- bl-3 below sinta on opening page -->
+                <div class="frame-tl animate__animated animate__fadeInBottomLeft animate__slow"
+                    style="top: 60%; z-index: 4; animation-delay: 0.7s;">
+                    <div class="animate-left" style="transform: translate(-10%, 120%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/bl-3.webp" alt="bunga"
+                            style="transform-origin: bottom left; animation-delay: 300ms;">
+                    </div>
+                </div>
+                <div class="frame-tr animate__animated animate__fadeInRight animate__slow"
+                    style="top: 38%; transform: translateY(-60%); z-index: 1; width: 60%;">
+                    <div class="animate-right" style="transform: translate(15%, 0);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/tr-2.webp" alt="daun"
+                            style="transform-origin: center right; animation-delay: 120ms;">
+                    </div>
+                </div>
+                <!-- br-1 in front of blur bg (opening) -->
+                <div class="frame-tr animate__animated animate__fadeInBottomRight animate__slow"
+                    style="top: 52%; z-index: 3; animation-delay: 0.3s;">
+                    <div class="animate-right" style="transform: translate(0%, 50%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/br-1.webp" alt="ornament"
+                            style="transform-origin: bottom right; animation-delay: 150ms;">
+                    </div>
+                </div>
+                <!-- Rama below tr-2 on opening page -->
+                <div class="frame-tr animate__animated animate__fadeInBottomRight animate__slow"
+                    style="top: 52%; z-index: 1; animation-delay: 0.5s;">
+                    <div class="animate-right" style="transform: translate(20%, 50%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/rama.webp" alt="wayang rama"
+                            style="transform-origin: bottom right; animation-delay: 100ms;">
+                    </div>
+                </div>
+                <!-- br-3 below rama on opening page -->
+                <div class="frame-tr animate__animated animate__fadeInBottomRight animate__slow"
+                    style="top: 60%; z-index: 4; animation-delay: 0.7s;">
+                    <div class="animate-right" style="transform: translate(10%, 120%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/br-3.webp" alt="bunga"
+                            style="transform-origin: bottom right; animation-delay: 300ms;">
+                    </div>
+                </div>
+                <!-- Wayang -->
+                <div class="frame-bl animate__animated animate__fadeInBottomLeft animate__slow"
+                    style="animation-delay: 1s;">
+                    <div class="animate-left" style="transform: translate(-27%, -87%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/sinta.webp"
+                            alt="wayang sinta" style="transform-origin: bottom left; animation-delay: 100ms;">
+                    </div>
+                </div>
+                <div class="frame-br animate__animated animate__fadeInBottomRight animate__slow"
+                    style="animation-delay: 1s;">
+                    <div class="animate-right" style="transform: translate(27%, -87%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/rama.webp" alt="wayang rama"
+                            style="transform-origin: bottom right; animation-delay: 100ms;">
+                    </div>
+                </div>
+                <!-- Bunga (Flowers) -->
+                <div class="frame-bl animate__animated animate__fadeInBottomLeft animate__slow"
+                    style="animation-delay: 0.8s; z-index: 4;">
+                    <div class="animate-left" style="transform: translate(-16%, -70%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/bl-3.webp" alt="bunga"
+                            style="transform-origin: bottom left; animation-delay: 300ms;">
+                    </div>
+                </div>
+                <div class="frame-br animate__animated animate__fadeInBottomRight animate__slow"
+                    style="animation-delay: 0.8s; z-index: 4;">
+                    <div class="animate-right" style="transform: translate(16%, -70%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/br-3.webp" alt="bunga"
+                            style="transform-origin: bottom right; animation-delay: 300ms;">
+                    </div>
+                </div>
+                <!-- Corner ornaments -->
+                <img class="frame-bl animate__animated animate__fadeInLeft animate__slower"
+                    src="https://nkundangan.com/themes/art-blue-java/bl-2.webp" alt="frame" style="z-index: 4; ">
+                <img class="frame-br animate__animated animate__fadeInRight animate__slower"
+                    src="https://nkundangan.com/themes/art-blue-java/br-2.webp" alt="frame" style="z-index: 4; ">
+            </div>
+
+            <div class="content-inner" style="padding-bottom: 30%;">
+                <div class="text-center mb-4 animate__animated animate__fadeInDown animate__slower"
+                    style="font-size:14.4px;">✤ Undangan Manten ✤</div>
+
+                <div class="pt-3 d-flex align-items-center justify-content-center mb-2 mx-auto animate__animated animate__zoomIn animate__slower"
+                    style="height:112px;width:60px;background-image:url('https://assets.satumomen.com/images/galleries/27897-gallery-1672939613.png');background-repeat:no-repeat;background-size:contain;background-position:center;">
+                    <div class="text-left font-latin color-accent"
+                        style="font-size:60px;line-height:1;transform:translate(2px, 9px);">J</div>
+                    <div class="text-right font-latin color-accent"
+                        style="font-size:60px;line-height:1;transform:translate(-8px, 33px);">T</div>
+                </div>
+
+                <div class="w-100 d-flex align-items-center justify-content-center mt-4">
+                    <div class="text-right animate__animated animate__fadeInLeft animate__slower" style="width:40%;">
+                        <div class="color-accent font-accent" style="font-size:40px;line-height:1;">Juli</div>
+                        <div style="font-size:14px;">Dumai</div>
+                    </div>
+                    <div class="px-2 font-latin animate__animated animate__zoomIn animate__slower"
+                        style="font-size:60px;">&amp;</div>
+                    <div class="text-left animate__animated animate__fadeInRight animate__slower" style="width:40%;">
+                        <div class="color-accent font-accent" style="font-size:40px;line-height:1;">Tyo</div>
+                        <div style="font-size:14px;">Selatbaru</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= QUOTES PAGE ================= -->
+        <div id="slide-2" class="slide hidden">
+            <div class="frame">
+                <img class="frame-tl animate__animated animate__fadeInTopLeft animate__slower"
+                    src="https://nkundangan.com/themes/art-blue-java/tl.webp" alt="frame">
+                <img class="frame-tr animate__animated animate__fadeInTopRight animate__slower"
+                    src="https://nkundangan.com/themes/art-blue-java/tr.webp" alt="frame">
+                <!-- Daun (Leaves) -->
+                <div class="frame-tl animate__animated animate__fadeInTopLeft animate__slow">
+                    <div class="animate-left" style="transform: translate(-5%, 145%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/tl-2.webp" alt="daun"
+                            style="transform-origin: bottom left;">
+                    </div>
+                </div>
+                <div class="frame-tr animate__animated animate__fadeInTopRight animate__slow">
+                    <div class="animate-right" style="transform: translate(5%, 145%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/tr-2.webp" alt="daun"
+                            style="transform-origin: bottom right;">
+                    </div>
+                </div>
+                <!-- Wayang -->
+                <div class="frame-bl animate__animated animate__fadeInBottomLeft animate__slow"
+                    style="animation-delay: 1s;">
+                    <div class="animate-left" style="transform: translate(-27%, -87%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/sinta.webp"
+                            alt="wayang sinta" style="transform-origin: bottom left; animation-delay: 100ms;">
+                    </div>
+                </div>
+                <div class="frame-br animate__animated animate__fadeInBottomRight animate__slow"
+                    style="animation-delay: 1s;">
+                    <div class="animate-right" style="transform: translate(27%, -87%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/rama.webp" alt="wayang rama"
+                            style="transform-origin: bottom right; animation-delay: 100ms;">
+                    </div>
+                </div>
+                <!-- Bunga (Flowers) -->
+                <div class="frame-bl animate__animated animate__fadeInBottomLeft animate__slow"
+                    style="animation-delay: 0.8s; z-index: 4;">
+                    <div class="animate-left" style="transform: translate(-16%, -70%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/bl-3.webp" alt="bunga"
+                            style="transform-origin: bottom left; animation-delay: 300ms;">
+                    </div>
+                </div>
+                <div class="frame-br animate__animated animate__fadeInBottomRight animate__slow"
+                    style="animation-delay: 0.8s; z-index: 4;">
+                    <div class="animate-right" style="transform: translate(16%, -70%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/br-3.webp" alt="bunga"
+                            style="transform-origin: bottom right; animation-delay: 300ms;">
+                    </div>
+                </div>
+                <!-- Corner ornaments -->
+                <img class="frame-bl animate__animated animate__fadeInLeft animate__slower"
+                    src="https://nkundangan.com/themes/art-blue-java/bl-2.webp" alt="frame" style="z-index: 4; ">
+                <img class="frame-br animate__animated animate__fadeInRight animate__slower"
+                    src="https://nkundangan.com/themes/art-blue-java/br-2.webp" alt="frame" style="z-index: 4; ">
+            </div>
+            <div class="content-inner h-100 d-flex flex-column justify-content-center align-items-center">
+                <div class="animate__animated animate__fadeInDown animate__slower">
+                    <div style="width:158px;height:89px;margin:auto;overflow:hidden;padding-bottom:20px;">
+                        <img src="https://assets.satumomen.com/images/galleries/27897-gallery-1672939613.png"
+                            style="width: 100%; height: 100%; object-fit: contain;">
+                    </div>
+                </div>
+                <div class="text-center mt-3">
+                    <div class="mb-4 animate__animated animate__fadeInDown animate__slower" style="font-size:14.4px;">✤
+                        Adz-Dzariyat : 49 ✤</div>
+                    <div class="color-accent mb-3 animate__animated animate__zoomIn animate__slower"
+                        style="font-size:40px;">وَمِنْ كُلِّ شَيْءٍ خَلَقْنَا<br>زَوْجَيْنِ لَعَلَّكُمْ تَذَكَّرُوْنَ
+                    </div>
+                    <div class="animate__animated animate__fadeInUp animate__slower"
+                        style="font-size:13px; line-height:1.5;">Mahasuci Allah yang menciptakan makhluk-<br>Nya
+                        berpasang-pasangan</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= MEMPELAI PAGE ================= -->
+        <div id="slide-3" class="slide hidden">
+            <div class="frame">
+                <img class="frame-tl animate__animated animate__fadeInTopLeft animate__slower"
+                    src="https://nkundangan.com/themes/art-blue-java/tl.webp" alt="frame">
+                <img class="frame-tr animate__animated animate__fadeInTopRight animate__slower"
+                    src="https://nkundangan.com/themes/art-blue-java/tr.webp" alt="frame">
+                <!-- Daun (Leaves) -->
+                <div class="frame-tl animate__animated animate__fadeInTopLeft animate__slow">
+                    <div class="animate-left" style="transform: translate(-5%, 145%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/tl-2.webp" alt="daun"
+                            style="transform-origin: bottom left;">
+                    </div>
+                </div>
+                <div class="frame-tr animate__animated animate__fadeInTopRight animate__slow">
+                    <div class="animate-right" style="transform: translate(5%, 145%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/tr-2.webp" alt="daun"
+                            style="transform-origin: bottom right;">
+                    </div>
+                </div>
+                <!-- Wayang -->
+                <div class="frame-bl animate__animated animate__fadeInBottomLeft animate__slow"
+                    style="animation-delay: 1s;">
+                    <div class="animate-left" style="transform: translate(-27%, -87%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/sinta.webp"
+                            alt="wayang sinta" style="transform-origin: bottom left; animation-delay: 100ms;">
+                    </div>
+                </div>
+                <div class="frame-br animate__animated animate__fadeInBottomRight animate__slow"
+                    style="animation-delay: 1s;">
+                    <div class="animate-right" style="transform: translate(27%, -87%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/rama.webp" alt="wayang rama"
+                            style="transform-origin: bottom right; animation-delay: 100ms;">
+                    </div>
+                </div>
+                <!-- Bunga (Flowers) -->
+                <div class="frame-bl animate__animated animate__fadeInBottomLeft animate__slow"
+                    style="animation-delay: 0.8s; z-index: 4;">
+                    <div class="animate-left" style="transform: translate(-16%, -70%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/bl-3.webp" alt="bunga"
+                            style="transform-origin: bottom left; animation-delay: 300ms;">
+                    </div>
+                </div>
+                <div class="frame-br animate__animated animate__fadeInBottomRight animate__slow"
+                    style="animation-delay: 0.8s; z-index: 4;">
+                    <div class="animate-right" style="transform: translate(16%, -70%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/br-3.webp" alt="bunga"
+                            style="transform-origin: bottom right; animation-delay: 300ms;">
+                    </div>
+                </div>
+                <!-- Corner ornaments -->
+                <img class="frame-bl animate__animated animate__fadeInLeft animate__slower"
+                    src="https://nkundangan.com/themes/art-blue-java/bl-2.webp" alt="frame" style="z-index: 4; ">
+                <img class="frame-br animate__animated animate__fadeInRight animate__slower"
+                    src="https://nkundangan.com/themes/art-blue-java/br-2.webp" alt="frame" style="z-index: 4; ">
+            </div>
+            <div class="content-inner h-100 d-flex flex-column justify-content-center align-items-center"
+                style="padding-top:20px;">
+                <div class="mb-3 animate__animated animate__fadeInLeft animate__slower"
+                    style="height:100px;width:100px;margin:auto;border-radius:100%;overflow:hidden; border:2px solid var(--inv-border);">
+                    <img src="https://assets.satumomen.com/assets/female-1-1687991981.webp"
+                        style="width: 100%;height: 100%;object-fit: cover;">
+                </div>
+                <div class="text-center animate__animated animate__fadeInLeft animate__slower mb-3">
+                    <div class="color-accent h4 mb-2 font-great-vibes" style="font-size:36px; line-height:1.2;">Juliyana Wati</div>
+                    <div style="font-size:14.4px; line-height:1.4;">Putri Ketiga dari<br>Bapak Mahmud/Soeran
+                        (Alm)<br>&amp; Ibu
+                        Suharsini</div>
+                </div>
+                <div class="mb-3 text-center animate__animated animate__fadeIn animate__slower font-great-vibes"
+                    style="font-size:36px;">dengan</div>
+                <div class="text-center animate__animated animate__fadeInRight animate__slower mb-3">
+                    <div class="color-accent h4 mb-2 font-great-vibes" style="font-size:36px; line-height:1.2;">Agus Setiyoko S.Pd</div>
+                    <div style="font-size:14.4px; line-height:1.4;">Putra Kedua dari<br>Bapak Pairun &amp; Ibu Isnawati
+                        (Almh)
+                    </div>
+                </div>
+                <div class="mt-2 animate__animated animate__fadeInRight animate__slower"
+                    style="height:100px;width:100px;margin:auto;border-radius:100%;overflow:hidden; border:2px solid var(--inv-border);">
+                    <img src="https://assets.satumomen.com/assets/male-1-1687991959.webp"
+                        style="width: 100%;height: 100%;object-fit: cover;">
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= AKAD PAGE ================= -->
+        <div id="slide-4" class="slide hidden">
+            <div class="frame">
+                <img class="frame-tl animate__animated animate__fadeInTopLeft animate__slower"
+                    src="https://nkundangan.com/themes/art-blue-java/tl.webp" alt="frame">
+                <img class="frame-tr animate__animated animate__fadeInTopRight animate__slower"
+                    src="https://nkundangan.com/themes/art-blue-java/tr.webp" alt="frame">
+                <!-- Daun (Leaves) -->
+                <div class="frame-tl animate__animated animate__fadeInTopLeft animate__slow">
+                    <div class="animate-left" style="transform: translate(-5%, 145%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/tl-2.webp" alt="daun"
+                            style="transform-origin: bottom left;">
+                    </div>
+                </div>
+                <div class="frame-tr animate__animated animate__fadeInTopRight animate__slow">
+                    <div class="animate-right" style="transform: translate(5%, 145%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/tr-2.webp" alt="daun"
+                            style="transform-origin: bottom right;">
+                    </div>
+                </div>
+                <!-- Wayang -->
+                <div class="frame-bl animate__animated animate__fadeInBottomLeft animate__slow"
+                    style="animation-delay: 1s;">
+                    <div class="animate-left" style="transform: translate(-27%, -87%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/sinta.webp"
+                            alt="wayang sinta" style="transform-origin: bottom left; animation-delay: 100ms;">
+                    </div>
+                </div>
+                <div class="frame-br animate__animated animate__fadeInBottomRight animate__slow"
+                    style="animation-delay: 1s;">
+                    <div class="animate-right" style="transform: translate(27%, -87%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/rama.webp" alt="wayang rama"
+                            style="transform-origin: bottom right; animation-delay: 100ms;">
+                    </div>
+                </div>
+                <!-- Bunga (Flowers) -->
+                <div class="frame-bl animate__animated animate__fadeInBottomLeft animate__slow"
+                    style="animation-delay: 0.8s; z-index: 4;">
+                    <div class="animate-left" style="transform: translate(-16%, -70%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/bl-3.webp" alt="bunga"
+                            style="transform-origin: bottom left; animation-delay: 300ms;">
+                    </div>
+                </div>
+                <div class="frame-br animate__animated animate__fadeInBottomRight animate__slow"
+                    style="animation-delay: 0.8s; z-index: 4;">
+                    <div class="animate-right" style="transform: translate(16%, -70%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/br-3.webp" alt="bunga"
+                            style="transform-origin: bottom right; animation-delay: 300ms;">
+                    </div>
+                </div>
+                <!-- Corner ornaments -->
+                <img class="frame-bl animate__animated animate__fadeInLeft animate__slower"
+                    src="https://nkundangan.com/themes/art-blue-java/bl-2.webp" alt="frame" style="z-index: 4; ">
+                <img class="frame-br animate__animated animate__fadeInRight animate__slower"
+                    src="https://nkundangan.com/themes/art-blue-java/br-2.webp" alt="frame" style="z-index: 4; ">
+            </div>
+            <div class="content-inner h-100 d-flex flex-column justify-content-center align-items-center">
+                <div class="animate__animated animate__fadeInDown animate__slower mb-3">
+                    <div style="width:158px;height:89px;margin:auto;">
+                        <img src="https://assets.satumomen.com/images/galleries/27897-gallery-1672939613.png"
+                            style="width: 100%; height: 100%; object-fit: contain;">
+                    </div>
+                </div>
+                <div class="text-center animate__animated animate__fadeInDown animate__slower mb-3">
+                    <div class="color-accent font-weight-bold" style="font-size:16px;">✤ Akad Pernikahan ✤</div>
+                    <div style="font-size:14px;">Pukul 08.00 WIB</div>
+                </div>
+                <div class="text-center animate__animated animate__zoomIn animate__slower mb-3">
+                    <div class="font-latin" style="font-size:50px;line-height:1.2;">Ahad</div>
+                    <div class="color-accent font-accent" style="font-size:50px;line-height:1.2;">26.07.26</div>
+                </div>
+                <div class="text-center animate__animated animate__zoomIn animate__slower mb-3">
+                    <div class="color-accent font-weight-bold" style="font-size:16px;">✤ Dumai ✤</div>
+                    <div style="font-size:14px; line-height:1.4;">Pukul 08.00 WIB</div>
+                </div>
+                <div class="mt-3 mx-auto animate__animated animate__fadeInUp animate__slower" style="width:130px;">
+                    <img src="https://assets.satumomen.com/images/galleries/301467-gallery-FMgCPTNp2h.png"
+                        style="width: 100%; object-fit: contain;">
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= RESEPSI PAGE ================= -->
+        <div id="slide-5" class="slide hidden">
+            <div class="frame">
+                <img class="frame-tl animate__animated animate__fadeInTopLeft animate__slower"
+                    src="https://nkundangan.com/themes/art-blue-java/tl.webp" alt="frame">
+                <img class="frame-tr animate__animated animate__fadeInTopRight animate__slower"
+                    src="https://nkundangan.com/themes/art-blue-java/tr.webp" alt="frame">
+                <!-- Daun (Leaves) -->
+                <div class="frame-tl animate__animated animate__fadeInTopLeft animate__slow">
+                    <div class="animate-left" style="transform: translate(-5%, 145%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/tl-2.webp" alt="daun"
+                            style="transform-origin: bottom left;">
+                    </div>
+                </div>
+                <div class="frame-tr animate__animated animate__fadeInTopRight animate__slow">
+                    <div class="animate-right" style="transform: translate(5%, 145%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/tr-2.webp" alt="daun"
+                            style="transform-origin: bottom right;">
+                    </div>
+                </div>
+                <!-- Wayang -->
+                <div class="frame-bl animate__animated animate__fadeInBottomLeft animate__slow"
+                    style="animation-delay: 1s;">
+                    <div class="animate-left" style="transform: translate(-27%, -87%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/sinta.webp"
+                            alt="wayang sinta" style="transform-origin: bottom left; animation-delay: 100ms;">
+                    </div>
+                </div>
+                <div class="frame-br animate__animated animate__fadeInBottomRight animate__slow"
+                    style="animation-delay: 1s;">
+                    <div class="animate-right" style="transform: translate(27%, -87%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/rama.webp" alt="wayang rama"
+                            style="transform-origin: bottom right; animation-delay: 100ms;">
+                    </div>
+                </div>
+                <!-- Bunga (Flowers) -->
+                <div class="frame-bl animate__animated animate__fadeInBottomLeft animate__slow"
+                    style="animation-delay: 0.8s; z-index: 4;">
+                    <div class="animate-left" style="transform: translate(-16%, -70%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/bl-3.webp" alt="bunga"
+                            style="transform-origin: bottom left; animation-delay: 300ms;">
+                    </div>
+                </div>
+                <div class="frame-br animate__animated animate__fadeInBottomRight animate__slow"
+                    style="animation-delay: 0.8s; z-index: 4;">
+                    <div class="animate-right" style="transform: translate(16%, -70%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/br-3.webp" alt="bunga"
+                            style="transform-origin: bottom right; animation-delay: 300ms;">
+                    </div>
+                </div>
+                <!-- Corner ornaments -->
+                <img class="frame-bl animate__animated animate__fadeInLeft animate__slower"
+                    src="https://nkundangan.com/themes/art-blue-java/bl-2.webp" alt="frame" style="z-index: 4; ">
+                <img class="frame-br animate__animated animate__fadeInRight animate__slower"
+                    src="https://nkundangan.com/themes/art-blue-java/br-2.webp" alt="frame" style="z-index: 4; ">
+            </div>
+            <div class="content-inner h-100 d-flex flex-column justify-content-center align-items-center">
+                <div class="animate__animated animate__fadeInDown animate__slower mb-3">
+                    <div style="width:158px;height:89px;margin:auto;">
+                        <img src="https://assets.satumomen.com/images/galleries/27897-gallery-1672939613.png"
+                            style="width: 100%; height: 100%; object-fit: contain;">
+                    </div>
+                </div>
+                <div class="text-center animate__animated animate__fadeInDown animate__slower mb-3">
+                    <div class="color-accent font-weight-bold" style="font-size:16px;">✤ Resepsi Pernikahan ✤</div>
+                    <div style="font-size:14px;">Pukul 10.00 WIB s/d Selesai</div>
+                </div>
+                <div class="text-center animate__animated animate__zoomIn animate__slower mb-3">
+                    <div class="font-latin" style="font-size:50px;line-height:1.2;">Ahad</div>
+                    <div class="color-accent font-accent" style="font-size:50px;line-height:1.2;">26.07.26</div>
+                </div>
+                <div class="text-center animate__animated animate__zoomIn animate__slower mb-3">
+                    <div class="color-accent font-weight-bold" style="font-size:16px;">✤ Bunga Tanjung ✤</div>
+                    <div style="font-size:14px; line-height:1.4;">Pukul 10.00 WIB s/d Selesai</div>
+                </div>
+                <div class="mt-3 mx-auto animate__animated animate__fadeInUp animate__slower" style="width:130px;">
+                    <img src="https://assets.satumomen.com/images/galleries/301467-gallery-FMgCPTNp2h.png"
+                        style="width: 100%; object-fit: contain;">
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= MAPS PAGE ================= -->
+        <div id="slide-6" class="slide hidden">
+            <div class="frame">
+                <img class="frame-tl animate__animated animate__fadeInTopLeft animate__slower"
+                    src="https://nkundangan.com/themes/art-blue-java/tl.webp" alt="frame">
+                <img class="frame-tr animate__animated animate__fadeInTopRight animate__slower"
+                    src="https://nkundangan.com/themes/art-blue-java/tr.webp" alt="frame">
+                <!-- Daun (Leaves) -->
+                <div class="frame-tl animate__animated animate__fadeInTopLeft animate__slow">
+                    <div class="animate-left" style="transform: translate(-5%, 145%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/tl-2.webp" alt="daun"
+                            style="transform-origin: bottom left;">
+                    </div>
+                </div>
+                <div class="frame-tr animate__animated animate__fadeInTopRight animate__slow">
+                    <div class="animate-right" style="transform: translate(5%, 145%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/tr-2.webp" alt="daun"
+                            style="transform-origin: bottom right;">
+                    </div>
+                </div>
+                <!-- Wayang -->
+                <div class="frame-bl animate__animated animate__fadeInBottomLeft animate__slow"
+                    style="animation-delay: 1s;">
+                    <div class="animate-left" style="transform: translate(-27%, -87%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/sinta.webp"
+                            alt="wayang sinta" style="transform-origin: bottom left; animation-delay: 100ms;">
+                    </div>
+                </div>
+                <div class="frame-br animate__animated animate__fadeInBottomRight animate__slow"
+                    style="animation-delay: 1s;">
+                    <div class="animate-right" style="transform: translate(27%, -87%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/rama.webp" alt="wayang rama"
+                            style="transform-origin: bottom right; animation-delay: 100ms;">
+                    </div>
+                </div>
+                <!-- Bunga (Flowers) -->
+                <div class="frame-bl animate__animated animate__fadeInBottomLeft animate__slow"
+                    style="animation-delay: 0.8s; z-index: 4;">
+                    <div class="animate-left" style="transform: translate(-16%, -70%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/bl-3.webp" alt="bunga"
+                            style="transform-origin: bottom left; animation-delay: 300ms;">
+                    </div>
+                </div>
+                <div class="frame-br animate__animated animate__fadeInBottomRight animate__slow"
+                    style="animation-delay: 0.8s; z-index: 4;">
+                    <div class="animate-right" style="transform: translate(16%, -70%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/br-3.webp" alt="bunga"
+                            style="transform-origin: bottom right; animation-delay: 300ms;">
+                    </div>
+                </div>
+                <!-- Corner ornaments -->
+                <img class="frame-bl animate__animated animate__fadeInLeft animate__slower"
+                    src="https://nkundangan.com/themes/art-blue-java/bl-2.webp" alt="frame" style="z-index: 4; ">
+                <img class="frame-br animate__animated animate__fadeInRight animate__slower"
+                    src="https://nkundangan.com/themes/art-blue-java/br-2.webp" alt="frame" style="z-index: 4; ">
+            </div>
+            <div class="content-inner h-100 d-flex flex-column justify-content-center align-items-center">
+                <div style="width:90%; height:300px; border-radius:10px; overflow:hidden; border:2px solid var(--inv-border); margin-bottom:20px;"
+                    class="animate__animated animate__fadeInDown animate__slow">
+                    <iframe width="100%" height="100%" style="border:0;" allowfullscreen=""
+                        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCpV55KNPo55TuxnDFd_dR3MD0luBrN1Gc&amp;zoom=17&amp;q=1.657327,101.399226"
+                        class="maps-embed"></iframe>
+                </div>
+                <div class="text-center animate__animated animate__fadeInUp animate__slow px-3">
+                    <div class="font-weight-bold color-accent mb-2" style="font-size:18px;">Lokasi Resepsi</div>
+                    <div class="mb-4" style="font-size:14px; line-height:1.5;">Jl. Lestari, Bunga Tanjung<br>Kec. Datuk
+                        Bandar Timur, Kota Tanjung Balai</div>
+                    <a href="https://goo.gl/maps/YPMGCRKsfcGTVNwLA" target="_blank" class="btn-open"
+                        style="text-decoration:none; display:inline-block;">Petunjuk Ke Lokasi</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= GIFT PAGE ================= -->
+        <div id="slide-7" class="slide hidden">
+            <div class="frame">
+                <img class="frame-tl animate__animated animate__fadeInTopLeft animate__slower"
+                    src="https://nkundangan.com/themes/art-blue-java/tl.webp" alt="frame">
+                <img class="frame-tr animate__animated animate__fadeInTopRight animate__slower"
+                    src="https://nkundangan.com/themes/art-blue-java/tr.webp" alt="frame">
+                <!-- Daun (Leaves) -->
+                <div class="frame-tl animate__animated animate__fadeInTopLeft animate__slow">
+                    <div class="animate-left" style="transform: translate(-5%, 145%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/tl-2.webp" alt="daun"
+                            style="transform-origin: bottom left;">
+                    </div>
+                </div>
+                <div class="frame-tr animate__animated animate__fadeInTopRight animate__slow">
+                    <div class="animate-right" style="transform: translate(5%, 145%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/tr-2.webp" alt="daun"
+                            style="transform-origin: bottom right;">
+                    </div>
+                </div>
+                <!-- Wayang -->
+                <div class="frame-bl animate__animated animate__fadeInBottomLeft animate__slow"
+                    style="animation-delay: 1s;">
+                    <div class="animate-left" style="transform: translate(-27%, -87%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/sinta.webp"
+                            alt="wayang sinta" style="transform-origin: bottom left; animation-delay: 100ms;">
+                    </div>
+                </div>
+                <div class="frame-br animate__animated animate__fadeInBottomRight animate__slow"
+                    style="animation-delay: 1s;">
+                    <div class="animate-right" style="transform: translate(27%, -87%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/rama.webp" alt="wayang rama"
+                            style="transform-origin: bottom right; animation-delay: 100ms;">
+                    </div>
+                </div>
+                <!-- Bunga (Flowers) -->
+                <div class="frame-bl animate__animated animate__fadeInBottomLeft animate__slow"
+                    style="animation-delay: 0.8s; z-index: 4;">
+                    <div class="animate-left" style="transform: translate(-16%, -70%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/bl-3.webp" alt="bunga"
+                            style="transform-origin: bottom left; animation-delay: 300ms;">
+                    </div>
+                </div>
+                <div class="frame-br animate__animated animate__fadeInBottomRight animate__slow"
+                    style="animation-delay: 0.8s; z-index: 4;">
+                    <div class="animate-right" style="transform: translate(16%, -70%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/br-3.webp" alt="bunga"
+                            style="transform-origin: bottom right; animation-delay: 300ms;">
+                    </div>
+                </div>
+                <!-- Corner ornaments -->
+                <img class="frame-bl animate__animated animate__fadeInLeft animate__slower"
+                    src="https://nkundangan.com/themes/art-blue-java/bl-2.webp" alt="frame" style="z-index: 4; ">
+                <img class="frame-br animate__animated animate__fadeInRight animate__slower"
+                    src="https://nkundangan.com/themes/art-blue-java/br-2.webp" alt="frame" style="z-index: 4; ">
+            </div>
+            <div class="content-inner h-100 d-flex flex-column justify-content-center align-items-center px-4">
+                <div class="font-latin color-accent mb-3 animate__animated animate__fadeInDown animate__slower"
+                    style="font-size:36px;">Tanda Kasih</div>
+                <div class="mb-4 animate__animated animate__fadeInDown animate__slower"
+                    style="font-size:14.4px; line-height:1.5;">Terima kasih telah menambah semangat kegembiraan
+                    pernikahan kami dengan kehadiran dan hadiah indah Anda.</div>
+
+                <div class="w-100 p-3 mt-2 animate__animated animate__zoomIn animate__slow"
+                    style="background-color:rgba(255,255,255,0.7); border-radius:10px; border:1px solid var(--inv-border);">
+                    <div class="d-flex align-items-center mb-3 text-left">
+                        <img src="assets/bank.jpg"
+                            style="width:80px; height:auto; border-radius:5px; background:white; padding:5px; object-fit: contain;">
+                        <div class="ml-3 pl-3" style="padding-left:15px;">
+                            <div class="font-weight-bold" style="font-size:18px;">1720003682228</div>
+                            <div style="font-size:14px;">Bank Mandiri : JULIYANA WATI</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= THANKS PAGE ================= -->
+        <div id="slide-8" class="slide hidden">
+            <div class="frame">
+                <img class="frame-tl animate__animated animate__fadeInTopLeft animate__slower"
+                    src="https://nkundangan.com/themes/art-blue-java/tl.webp" alt="frame">
+                <img class="frame-tr animate__animated animate__fadeInTopRight animate__slower"
+                    src="https://nkundangan.com/themes/art-blue-java/tr.webp" alt="frame">
+                <!-- Daun (Leaves) -->
+                <div class="frame-tl animate__animated animate__fadeInTopLeft animate__slow">
+                    <div class="animate-left" style="transform: translate(-5%, 145%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/tl-2.webp" alt="daun"
+                            style="transform-origin: bottom left;">
+                    </div>
+                </div>
+                <div class="frame-tr animate__animated animate__fadeInTopRight animate__slow">
+                    <div class="animate-right" style="transform: translate(5%, 145%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/tr-2.webp" alt="daun"
+                            style="transform-origin: bottom right;">
+                    </div>
+                </div>
+                <!-- Wayang -->
+                <div class="frame-bl animate__animated animate__fadeInBottomLeft animate__slow"
+                    style="animation-delay: 1s;">
+                    <div class="animate-left" style="transform: translate(-27%, -87%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/sinta.webp"
+                            alt="wayang sinta" style="transform-origin: bottom left; animation-delay: 100ms;">
+                    </div>
+                </div>
+                <div class="frame-br animate__animated animate__fadeInBottomRight animate__slow"
+                    style="animation-delay: 1s;">
+                    <div class="animate-right" style="transform: translate(27%, -87%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/rama.webp" alt="wayang rama"
+                            style="transform-origin: bottom right; animation-delay: 100ms;">
+                    </div>
+                </div>
+                <!-- Bunga (Flowers) -->
+                <div class="frame-bl animate__animated animate__fadeInBottomLeft animate__slow"
+                    style="animation-delay: 0.8s; z-index: 4;">
+                    <div class="animate-left" style="transform: translate(-16%, -70%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/bl-3.webp" alt="bunga"
+                            style="transform-origin: bottom left; animation-delay: 300ms;">
+                    </div>
+                </div>
+                <div class="frame-br animate__animated animate__fadeInBottomRight animate__slow"
+                    style="animation-delay: 0.8s; z-index: 4;">
+                    <div class="animate-right" style="transform: translate(16%, -70%);">
+                        <img class="w-100" src="https://nkundangan.com/themes/art-blue-java/br-3.webp" alt="bunga"
+                            style="transform-origin: bottom right; animation-delay: 300ms;">
+                    </div>
+                </div>
+                <!-- Corner ornaments -->
+                <img class="frame-bl animate__animated animate__fadeInLeft animate__slower"
+                    src="https://nkundangan.com/themes/art-blue-java/bl-2.webp" alt="frame" style="z-index: 4; ">
+                <img class="frame-br animate__animated animate__fadeInRight animate__slower"
+                    src="https://nkundangan.com/themes/art-blue-java/br-2.webp" alt="frame" style="z-index: 4; ">
+            </div>
+            <div class="content-inner h-100 d-flex flex-column justify-content-center align-items-center px-4">
+                <div class="mb-4 animate__animated animate__fadeInDown animate__slower"
+                    style="font-size:14px; line-height:1.6;">
+                    Merupakan suatu kebahagiaan dan kehormatan bagi kami, apabila Bapak/Ibu/Saudara/i, berkenan hadir
+                    dan memberikan do'a restu kepada kedua mempelai.
+                </div>
+                <div class="mb-5 animate__animated animate__fadeInDown animate__slower font-italic"
+                    style="font-size:16px;">
+                    Wassalamu'alaikum Warahmatullahi Wabarakatuh
+                </div>
+                <div class="d-flex justify-content-center align-items-center animate__animated animate__fadeInDown animate__slow w-100"
+                    style="gap:20px;line-height:1.4;">
+                    <div style="flex:1;">
+                        <div style="text-decoration:underline;font-size:13px;">Keluarga</div>
+                        <div style="font-size:13px; font-weight:600;">Bapak Mahmud/Soeran (Alm)<br>dan Ibu Suharsini
+                        </div>
+                    </div>
+                    <div style="flex:1;">
+                        <div style="text-decoration:underline;font-size:13px;">Keluarga</div>
+                        <div style="font-size:13px; font-weight:600;">Bapak Pairun<br>dan Ibu Isnawati (Almh)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= BOTTOM NAVIGATION ================= -->
+        <div id="bottomNav" class="bottom-nav hidden"
+            style="overflow-x:auto; justify-content:flex-start; gap:20px; padding:10px 20px;">
+            <button class="nav-btn active" onclick="navTo(1)">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+                    <path
+                        d="M224,48H32A16,16,0,0,0,16,64V192a16,16,0,0,0,16,16H224a16,16,0,0,0,16-16V64A16,16,0,0,0,224,48ZM203.43,64,128,133.15,52.57,64ZM224,192H32V74.63l85.22,78.12a16,16,0,0,0,21.56,0L224,74.63Z">
+                    </path>
+                </svg>
+                <span>Opening</span>
+            </button>
+            <button class="nav-btn" onclick="navTo(2)">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+                    <path d="M232,128A104,104,0,1,1,128,24,104.13,104.13,0,0,1,232,128Z"></path>
+                </svg>
+                <span>Quotes</span>
+            </button>
+            <button class="nav-btn" onclick="navTo(3)">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+                    <path
+                        d="M240,94c0,70-103.79,126.66-108.21,129a8,8,0,0,1-7.58,0C119.79,220.66,16,164,16,94A62.07,62.07,0,0,1,78,32c20.65,0,38.73,8.88,50,23.89C139.27,40.88,157.35,32,178,32A62.07,62.07,0,0,1,240,94Z">
+                    </path>
+                </svg>
+                <span>Mempelai</span>
+            </button>
+            <button class="nav-btn" onclick="navTo(4)">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+                    <path
+                        d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm56,112H128a8,8,0,0,1-8-8V72a8,8,0,0,1,16,0v48h48a8,8,0,0,1,0,16Z">
+                    </path>
+                </svg>
+                <span>Akad</span>
+            </button>
+            <button class="nav-btn" onclick="navTo(5)">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+                    <path
+                        d="M216,72H180.92c.39-.33.79-.65,1.17-1A32,32,0,1,0,136.8,25.68L128,34.49l-8.8-8.81A32,32,0,1,0,73.91,71h0c.38.35.78.67,1.17,1H40A16,16,0,0,0,24,88v32a16,16,0,0,0,16,16v64a16,16,0,0,0,16,16H200a16,16,0,0,0,16-16V136a16,16,0,0,0,16-16V88A16,16,0,0,0,216,72ZM152,72a16,16,0,1,1,16-16,16.05,16.05,0,0,1-8,13.8V72ZM88,56a16,16,0,1,1,16,16H96V70A16.05,16.05,0,0,1,88,56Z">
+                    </path>
+                </svg>
+                <span>Resepsi</span>
+            </button>
+            <button class="nav-btn" onclick="navTo(6)">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+                    <path
+                        d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm48,104a8,8,0,0,1-8,8H88a8,8,0,0,1-8-8V112a8,8,0,0,1,8-8h80a8,8,0,0,1,8,8Z">
+                    </path>
+                </svg>
+                <span>Maps</span>
+            </button>
+            <button class="nav-btn" onclick="navTo(7)">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+                    <path
+                        d="M216,72H180.92c.39-.33.79-.65,1.17-1A32,32,0,1,0,136.8,25.68L128,34.49l-8.8-8.81A32,32,0,1,0,73.91,71h0c.38.35.78.67,1.17,1H40A16,16,0,0,0,24,88v32a16,16,0,0,0,16,16v64a16,16,0,0,0,16,16H200a16,16,0,0,0,16-16V136a16,16,0,0,0,16-16V88A16,16,0,0,0,216,72ZM152,72a16,16,0,1,1,16-16,16.05,16.05,0,0,1-8,13.8V72ZM88,56a16,16,0,1,1,16,16H96V70A16.05,16.05,0,0,1,88,56Z">
+                    </path>
+                </svg>
+                <span>Gift</span>
+            </button>
+            <button class="nav-btn" onclick="navTo(8)">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+                    <path
+                        d="M128,24a104,104,0,1,0,104,104A104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z">
+                    </path>
+                </svg>
+                <span>Thanks</span>
+            </button>
+        </div>
+
+    </div>
+
+    <!-- Audio Player -->
+    <audio id="bgMusic" loop>
+        <source src="assets/lestari.webm" type="audio/webm">
+    </audio>
+
+    <script>
+        let currentSlide = 1;
+
+        function openInvitation() {
+            document.getElementById('slide-cover').classList.add('hidden');
+            document.getElementById('slide-1').classList.remove('hidden');
+            document.getElementById('bottomNav').classList.remove('hidden');
+
+            // Try to play music
+            let music = document.getElementById('bgMusic');
+            music.volume = 0.5;
+            music.play().catch(e => console.log('Audio autoplay prevented'));
+
+            triggerAnimations('slide-1');
+        }
+
+        function triggerAnimations(slideId) {
+            const slide = document.getElementById(slideId);
+            if (!slide) return;
+            const animatedElements = slide.querySelectorAll('.animate__animated');
+
+            animatedElements.forEach(el => {
+                const classes = Array.from(el.classList).filter(c => c.startsWith('animate__'));
+                el.classList.remove(...classes);
+                void el.offsetWidth;
+                el.classList.add(...classes);
+            });
+        }
+
+        function navTo(slideNum) {
+            // Hide current slide
+            document.getElementById('slide-' + currentSlide).classList.add('hidden');
+            // Update active state on nav buttons
+            const btns = document.querySelectorAll('.nav-btn');
+            btns.forEach((btn, index) => {
+                if (index === slideNum - 1) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            // Show new slide
+            currentSlide = slideNum;
+            document.getElementById('slide-' + currentSlide).classList.remove('hidden');
+            triggerAnimations('slide-' + currentSlide);
+        }
+
+        // ── URL Params: tampilkan nama tamu dari ?to= ──────────────────────────
+        document.addEventListener('DOMContentLoaded', function () {
+            const params = new URLSearchParams(window.location.search);
+            const guestParam = params.get('to') || params.get('nama') || params.get('guest');
+            const el = document.getElementById('guestNameDisplay');
+            if (el && guestParam) {
+                el.textContent = guestParam.replace(/\+/g, ' ');
+            }
+
+            // ── Swipe Gesture (kiri/kanan) ─────────────────────────────────────
+            const TOTAL_SLIDES = 8;
+            const SWIPE_THRESHOLD = 50; // minimal px untuk dianggap swipe
+            let touchStartX = 0;
+            let touchStartY = 0;
+
+            document.addEventListener('touchstart', function (e) {
+                touchStartX = e.touches[0].clientX;
+                touchStartY = e.touches[0].clientY;
+            }, { passive: true });
+
+            document.addEventListener('touchend', function (e) {
+                const coverEl = document.getElementById('slide-cover');
+                // Hanya aktif jika cover sudah disembunyikan
+                if (coverEl && !coverEl.classList.contains('hidden')) return;
+
+                const deltaX = e.changedTouches[0].clientX - touchStartX;
+                const deltaY = e.changedTouches[0].clientY - touchStartY;
+
+                // Abaikan jika lebih banyak scroll vertikal
+                if (Math.abs(deltaY) > Math.abs(deltaX)) return;
+                // Abaikan jika swipe terlalu pendek
+                if (Math.abs(deltaX) < SWIPE_THRESHOLD) return;
+
+                if (deltaX < 0) {
+                    // Swipe ke kiri → slide berikutnya
+                    if (currentSlide < TOTAL_SLIDES) navTo(currentSlide + 1);
+                } else {
+                    // Swipe ke kanan → slide sebelumnya
+                    if (currentSlide > 1) navTo(currentSlide - 1);
+                }
+            }, { passive: true });
+        });
+    </script>
+</body>
+
+</html>
