@@ -488,7 +488,7 @@
         <!-- TOP BAR: Blue background with title & names -->
         <div class="cover-top">
             <p class="cover-label">The Wedding of</p>
-            <h1 class="cover-names">Yunia <span class="amp">&amp;</span> Khambali</h1>
+            <h1 class="cover-names">Triska <span class="amp">&amp;</span> Joan</h1>
             <!-- Ornamen sudut atas -->
             <div class="cover-top-ornament left"></div>
             <div class="cover-top-ornament right"></div>
@@ -498,7 +498,7 @@
 
         <!-- MIDDLE: Full photo, no overlay -->
         <div class="cover-photo-wrap">
-            <img src="assets/coverm.jpeg" alt="Khambali & Yunia" class="cover-photo-img" />
+            <img src="assets/coverm.jpeg" alt="Triska & Joan" class="cover-photo-img" />
         </div>
 
         <!-- BOTTOM BAR: Ivory background with guest name & button -->
@@ -528,19 +528,28 @@
         </audio>
 
         <!-- ── QUOTE ── -->
-        <section class="section quote-section" data-aos="fade-up">
-            <img src="assets/bunga3.png" alt="" class="quote-bunga quote-bunga--top-left" aria-hidden="true" />
-            <img src="assets/bunga3.png" alt="" class="quote-bunga quote-bunga--top-right" aria-hidden="true" />
-            <img src="assets/bunga4.png" alt="" class="quote-bunga quote-bunga--bot-left" aria-hidden="true" />
-            <img src="assets/bunga2.png" alt="" class="quote-bunga quote-bunga--bot-right" aria-hidden="true" />
-            <div class="quote-box">
-                <i class="fa-solid fa-quote-left quote-icon"></i>
-                <p class="quote-text">
-                    "Dan segala sesuatu Kami ciptakan berpasang-pasangan agar kamu mengingat (kebesaran Allah)."
-                </p>
-                <p class="quote-source">— QS. Adz-Dzariyyat : 49 —</p>
+        <section class="section quote-section">
+            <!-- Gambar 02.jpg: tetap di tempat saat scroll -->
+            <img src="assets/02.jpg" alt="" class="quote-photo-fixed" aria-hidden="true" />
+
+            <!-- Layer yang bergerak saat scroll: bunga + overlay + teks -->
+            <div class="quote-scroll-layer">
+                <img src="assets/bunga3.png" alt="" class="quote-bunga quote-bunga--top-left" aria-hidden="true" />
+                <img src="assets/bunga3.png" alt="" class="quote-bunga quote-bunga--top-right" aria-hidden="true" />
+                <img src="assets/bunga4.png" alt="" class="quote-bunga quote-bunga--bot-left" aria-hidden="true" />
+                <img src="assets/bunga2.png" alt="" class="quote-bunga quote-bunga--bot-right" aria-hidden="true" />
+                <!-- Overlay semi-transparan (background tambahan) -->
+                <div class="quote-overlay"></div>
+                <div class="quote-box" data-aos="fade-up">
+                    <i class="fa-solid fa-quote-left quote-icon"></i>
+                    <p class="quote-text">
+                        "Dan segala sesuatu Kami ciptakan berpasang-pasangan agar kamu mengingat (kebesaran Allah)."
+                    </p>
+                    <p class="quote-source">— QS. Adz-Dzariyyat : 49 —</p>
+                </div>
             </div>
         </section>
+
 
         <!-- ── MEMPELAI ── -->
         <section class="section couple-section">
@@ -552,7 +561,7 @@
 
             <div class="couple-wrapper">
 
-                <!-- ── MEMPELAI PRIA ── -->
+                <!-- ── MEMPELAI WANITA ── -->
                 <div class="couple-card" data-aos="fade-right">
                     <div class="couple-photo-frame">
                         <img src="assets/bunga_L.png" alt="" class="bunga-mempelai bunga-mempelai--pria"
@@ -560,12 +569,14 @@
                         <img src="assets/bunga_P.png" alt="" class="bunga-mempelai bunga-mempelai--pria-top"
                             aria-hidden="true" />
                         <div class="couple-photo-wrap">
-                            <img src="assets/wanita.png" alt="Yunia Ningsih, S.Pt" class="couple-photo" />
+                            <img src="assets/wanita.png" alt="Sy. Triska Agustiani Notovia A. Md. Tra"
+                                class="couple-photo" />
                         </div>
                     </div>
-                    <h3 class="couple-name">Yunia Ningsih, S.Pt</h3>
-                    <p class="couple-parents">Putri dari</p>
-                    <p class="couple-parents"><strong>Bapak Jaini</strong><br />&amp; <strong>Ibu Warsiyem</strong></p>
+                    <h3 class="couple-name">Sy. Triska Agustiani Notovia<br>A. Md. Tra</h3>
+                    <p class="couple-parents">Putri ketiga dari</p>
+                    <p class="couple-parents"><strong>Bapak Said Zulaili</strong><br />&amp; <strong>Ibu Jamilah
+                            Imina</strong></p>
                 </div>
 
                 <!-- Ornament & -->
@@ -573,7 +584,7 @@
                     <span class="amp-large">&amp;</span>
                 </div>
 
-                <!-- ── MEMPELAI WANITA ── -->
+                <!-- ── MEMPELAI PRIA ── -->
                 <div class="couple-card" data-aos="fade-left">
                     <div class="couple-photo-frame">
                         <img src="assets/pita.png" alt="" class="bunga-mempelai bunga-mempelai--wanita-top"
@@ -581,13 +592,13 @@
                         <img src="assets/bunga_L.png" alt="" class="bunga-mempelai bunga-mempelai--wanita"
                             aria-hidden="true" />
                         <div class="couple-photo-wrap">
-                            <img src="assets/pria.png" alt="Khambali S.P" class="couple-photo" />
+                            <img src="assets/pria.png" alt="Joanandes" class="couple-photo" />
                         </div>
                     </div>
-                    <h3 class="couple-name">Khambali S.P</h3>
-                    <p class="couple-parents">Putra dari</p>
-                    <p class="couple-parents"><strong>Bapak Alm. Misri</strong><br />&amp; <strong>Ibu Munah</strong>
-                    </p>
+                    <h3 class="couple-name">Joanandes</h3>
+                    <p class="couple-parents">Putra pertama dari</p>
+                    <p class="couple-parents"><strong>Bapak Zulfahmi Andi</strong><br />&amp; <strong>Ibu
+                            Desrina</strong></p>
                 </div>
 
             </div>
@@ -598,7 +609,7 @@
             <div class="countdown-bg"></div>
             <p class="section-label light">Menuju Hari Bahagia</p>
             <h2 class="section-title light">Save The Date</h2>
-            <p class="countdown-date-label">25 . 05 . 2026</p>
+            <p class="countdown-date-label">31 . 10 . 2026</p>
             <div class="countdown-grid" id="countdown">
                 <div class="count-box"><span id="cd-days">00</span><label>Hari</label></div>
                 <div class="count-box"><span id="cd-hours">00</span><label>Jam</label></div>
@@ -621,9 +632,11 @@
                     <div class="event-icon"><i class="fa-solid fa-ring"></i></div>
                     <h3 class="event-type">Akad Nikah</h3>
                     <div class="event-line"></div>
-                    <p class="event-day">Minggu</p>
-                    <p class="event-date">24 Mei 2026</p>
+                    <p class="event-day">Senin</p>
+                    <p class="event-date">10 Agustus 2026</p>
                     <p class="event-time"><i class="fa-regular fa-clock"></i> 09.00 WIB – SELESAI</p>
+                    <p class="event-location" style="margin-top:10px; font-weight:600; color:var(--gold);">KUA Teluk
+                        Belitung</p>
                 </div>
 
                 <!-- Resepsi -->
@@ -631,21 +644,23 @@
                     <div class="event-icon"><i class="fa-solid fa-champagne-glasses"></i></div>
                     <h3 class="event-type">Resepsi</h3>
                     <div class="event-line"></div>
-                    <p class="event-day">Senin</p>
-                    <p class="event-date">25 Mei 2026</p>
-                    <p class="event-time"><i class="fa-regular fa-clock"></i> 09.00 WIB– SELESAI</p>
+                    <p class="event-day">Sabtu</p>
+                    <p class="event-date">31 Oktober 2026</p>
+                    <p class="event-time"><i class="fa-regular fa-clock"></i> 09.00 WIB – SELESAI</p>
+                    <p class="event-location" style="margin-top:10px; font-weight:600; color:var(--gold);">Kediaman
+                        Mempelai Perempuan</p>
                 </div>
             </div>
 
             <!-- Lokasi -->
             <div class="location-box" data-aos="fade-up">
                 <i class="fa-solid fa-location-dot location-icon"></i>
-                <h4 class="location-name">Di Kediaman Mempelai Wanita</h4>
+                <h4 class="location-name">Kediaman Mempelai Perempuan</h4>
                 <p class="location-address">
-                    Langkat,Kec. Siak Kecil, Kabupaten Bengkalis,<br />
-                    Riau 28771
+                    Langkat, Kec. Siak Kecil,<br />
+                    Kabupaten Bengkalis, Riau 28771
                 </p>
-                <a href="https://maps.app.goo.gl/p3BqD5jZEN561RaV6" target="_blank" class="btn-maps">
+                <a href="https://maps.app.goo.gl/bKrtsrvPginwoZ9S9" target="_blank" class="btn-maps">
                     <i class="fa-solid fa-map-location-dot"></i> Buka Google Maps
                 </a>
             </div>
@@ -685,20 +700,6 @@
                     <img src="assets/5.jpg" alt="Foto 5" loading="lazy" />
                 </div>
 
-                <div class="gallery-item" data-aos="fade-up" data-aos-delay="250" data-index="5"
-                    data-src="assets/6.jpg">
-                    <img src="assets/6.jpg" alt="Foto 6" loading="lazy" />
-                </div>
-
-                <div class="gallery-item" data-aos="fade-up" data-aos-delay="300" data-index="6"
-                    data-src="assets/7.jpg">
-                    <img src="assets/7.jpg" alt="Foto 7" loading="lazy" />
-                </div>
-
-                <div class="gallery-item" data-aos="fade-up" data-aos-delay="300" data-index="6"
-                    data-src="assets/8.jpg">
-                    <img src="assets/8.jpg" alt="Foto 8" loading="lazy" />
-                </div>
 
             </div>
         </section>
@@ -716,27 +717,24 @@
             </p>
 
             <div class="bank-cards">
-                <!-- MANDIRI -->
+                <!-- BRI -->
                 <div class="bank-card" data-aos="fade-up">
-                    <div class="bank-logo DANA">DANA</div>
-                    <p class="bank-account">082283616149</p>
-                    <p class="bank-name"> <strong>Devi Ani lestari</strong></p>
-                    <button class="btn-copy" data-copy="082283616149">
+                    <div class="bank-logo" style="background:#00529C; color:#fff;">BRI</div>
+                    <p class="bank-account">3542 0102 5523 535</p>
+                    <p class="bank-name"><strong>Sy. Triska Agustiani Notovia</strong></p>
+                    <button class="btn-copy" data-copy="354201025523535">
                         <i class="fa-regular fa-copy"></i> Salin Nomor
                     </button>
                 </div>
 
-                <!-- Alamat Kado -->
-                <div class="gift-address" data-aos="fade-up">
-                    <i class="fa-solid fa-box-open"></i>
-                    <div>
-                        <p class="gift-address-title">Kirim Kado ke:</p>
-                        <p class="gift-address-text">Langkat,Kec. Siak Kecil, Kabupaten Bengkalis,<br />
-                            Riau 28771</p>
-                        <button class="btn-copy" data-copy="Langkat,Kec. Siak Kecil, Kabupaten Bengkalis, Riau 28771">
-                            <i class="fa-regular fa-copy"></i> Salin Alamat
-                        </button>
-                    </div>
+                <!-- DANA -->
+                <div class="bank-card" data-aos="fade-up">
+                    <div class="bank-logo DANA">DANA</div>
+                    <p class="bank-account">082287469129</p>
+                    <p class="bank-name"><strong>Sy. Triska Agustiani Notovia</strong></p>
+                    <button class="btn-copy" data-copy="082287469129">
+                        <i class="fa-regular fa-copy"></i> Salin Nomor
+                    </button>
                 </div>
         </section>
 
@@ -831,6 +829,37 @@
     <!-- AOS & Main Script -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script src="script.js"></script>
+
+    <!-- ── PARALLAX: gambar 02.jpg bergerak lebih lambat dari konten scroll ── -->
+    <script>
+        (function () {
+            const photoFixed = document.querySelector('.quote-photo-fixed');
+            if (!photoFixed) return;
+
+            function updateParallax() {
+                const section = photoFixed.closest('.quote-section');
+                if (!section) return;
+
+                const rect = section.getBoundingClientRect();
+                // Seberapa jauh section sudah terlewati viewport (0 = baru muncul, 1 = sudah lewat)
+                const viewportH = window.innerHeight;
+                const progress = -rect.top / (rect.height + viewportH);
+
+                // Gambar bergerak 15% dari ketinggian extra (15% extra height / 2 ke atas-bawah)
+                // Saat section di bagian bawah viewport → translateY(0)
+                // Saat section di bagian atas viewport → translateY(-15%)
+                const parallaxStrength = 15; // persen
+                const yOffset = progress * parallaxStrength;
+
+                photoFixed.style.transform = `translateY(-${yOffset}%)`;
+            }
+
+            window.addEventListener('scroll', updateParallax, { passive: true });
+            window.addEventListener('resize', updateParallax, { passive: true });
+            updateParallax();
+        })();
+    </script>
+
 </body>
 
 </html>

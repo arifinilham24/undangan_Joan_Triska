@@ -7,19 +7,19 @@
 ============================================================ */
 
 /* ── KONFIGURASI SUPABASE ────────────────────────────────── */
-const SUPABASE_URL = 'https://wtesrckwbscvmdwecusd.supabase.co';
+const SUPABASE_URL      = 'https://wtesrckwbscvmdwecusd.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable__1T0JH76jgChQ_ITRiT7vw_NcwWM4tQ';
 
 /* ── CONFIG UMUM ─────────────────────────────────────────── */
 const CONFIG = {
-  weddingDate: new Date('2026-05-25T09:00:00'),
+  weddingDate:   new Date('2026-05-25T09:00:00'),
   wishesPerPage: 10,
-  tableName: 'wishes',
+  tableName:     'wishes',
 };
 
 /* ── VARIABEL GLOBAL ─────────────────────────────────────── */
 let supabaseClient = null;  // nama berbeda agar tidak bentrok dengan window.supabase
-let musicPlaying = false;
+let musicPlaying   = false;
 let countdownTimer = null;
 
 /* ============================================================
@@ -80,7 +80,7 @@ function initSupabase() {
 ============================================================ */
 function setGuestName() {
   const params = new URLSearchParams(window.location.search);
-  const name = params.get('to') || params.get('nama');
+  const name   = params.get('to') || params.get('nama');
   if (name) {
     const el = document.getElementById('guest-name');
     if (el) el.textContent = decodeURIComponent(name);
@@ -96,11 +96,11 @@ function createParticles() {
 
   const total = 30;
   for (let i = 0; i < total; i++) {
-    const p = document.createElement('div');
+    const p     = document.createElement('div');
     p.className = 'particle';
-    const size = Math.random() * 6 + 2;
-    const left = Math.random() * 100;
-    const dur = Math.random() * 10 + 7;
+    const size  = Math.random() * 6 + 2;
+    const left  = Math.random() * 100;
+    const dur   = Math.random() * 10 + 7;
     const delay = Math.random() * 10;
     p.style.cssText = `width:${size}px;height:${size}px;left:${left}%;--dur:${dur}s;--delay:${delay}s;`;
     container.appendChild(p);
@@ -113,7 +113,7 @@ function createParticles() {
    Solusi: hapus hidden → force reflow → baru tambah visible
 ============================================================ */
 function handleOpenInvitation() {
-  const cover = document.getElementById('cover');
+  const cover      = document.getElementById('cover');
   const invitation = document.getElementById('invitation');
   if (!cover || !invitation) return;
 
@@ -146,9 +146,9 @@ function handleOpenInvitation() {
     if (typeof AOS !== 'undefined') {
       AOS.init({
         duration: 800,
-        once: true,
-        offset: 60,
-        easing: 'ease-out-cubic',
+        once:     true,
+        offset:   60,
+        easing:   'ease-out-cubic',
       });
     }
   }, 100);
@@ -167,8 +167,8 @@ function handleOpenInvitation() {
    MUSIK
 ============================================================ */
 function tryPlayMusic() {
-  const audio = document.getElementById('bg-music');
-  const btn = document.getElementById('music-btn');
+  const audio  = document.getElementById('bg-music');
+  const btn    = document.getElementById('music-btn');
   if (!audio) return;
 
   audio.volume = 0.4;
@@ -204,35 +204,35 @@ function startCountdown() {
   if (countdownTimer) clearInterval(countdownTimer);
 
   function update() {
-    const now = new Date();
+    const now  = new Date();
     const diff = CONFIG.weddingDate - now;
 
-    const elDays = document.getElementById('cd-days');
+    const elDays  = document.getElementById('cd-days');
     const elHours = document.getElementById('cd-hours');
-    const elMins = document.getElementById('cd-mins');
-    const elSecs = document.getElementById('cd-secs');
+    const elMins  = document.getElementById('cd-mins');
+    const elSecs  = document.getElementById('cd-secs');
 
     if (!elDays) return;
 
     if (diff <= 0) {
-      elDays.textContent = '00';
+      elDays.textContent  = '00';
       elHours.textContent = '00';
-      elMins.textContent = '00';
-      elSecs.textContent = '00';
+      elMins.textContent  = '00';
+      elSecs.textContent  = '00';
       clearInterval(countdownTimer);
       return;
     }
 
-    const pad = function (n) { return String(n).padStart(2, '0'); };
-    const days = Math.floor(diff / 86400000);
+    const pad   = function (n) { return String(n).padStart(2, '0'); };
+    const days  = Math.floor(diff / 86400000);
     const hours = Math.floor((diff % 86400000) / 3600000);
-    const mins = Math.floor((diff % 3600000) / 60000);
-    const secs = Math.floor((diff % 60000) / 1000);
+    const mins  = Math.floor((diff % 3600000)  / 60000);
+    const secs  = Math.floor((diff % 60000)    / 1000);
 
-    elDays.textContent = pad(days);
+    elDays.textContent  = pad(days);
     elHours.textContent = pad(hours);
-    elMins.textContent = pad(mins);
-    elSecs.textContent = pad(secs);
+    elMins.textContent  = pad(mins);
+    elSecs.textContent  = pad(secs);
   }
 
   update();
@@ -267,8 +267,8 @@ function handleCopyBtn(e) {
   }
 
   function fallbackCopy() {
-    const ta = document.createElement('textarea');
-    ta.value = text;
+    const ta         = document.createElement('textarea');
+    ta.value         = text;
     ta.style.cssText = 'position:fixed;opacity:0;top:-9999px;left:-9999px;';
     document.body.appendChild(ta);
     ta.focus();
@@ -290,8 +290,8 @@ function showStatus(message, type) {
 
   var styles = {
     success: 'background:rgba(46,95,138,0.1);color:var(--blue);border:1px solid rgba(46,95,138,0.25);',
-    error: 'background:rgba(200,50,50,0.08);color:#c0392b;border:1px solid rgba(200,50,50,0.2);',
-    info: 'background:rgba(201,168,76,0.1);color:var(--gold-dk);border:1px solid rgba(201,168,76,0.25);',
+    error:   'background:rgba(200,50,50,0.08);color:#c0392b;border:1px solid rgba(200,50,50,0.2);',
+    info:    'background:rgba(201,168,76,0.1);color:var(--gold-dk);border:1px solid rgba(201,168,76,0.25);',
   };
 
   el.setAttribute('style', 'display:block;padding:0.75rem 1rem;border-radius:10px;font-size:0.85rem;margin-bottom:1rem;' + (styles[type] || styles.info));
@@ -343,20 +343,20 @@ async function insertWish(payload) {
 function formatDate(isoString) {
   var d = new Date(isoString);
   return d.toLocaleDateString('id-ID', {
-    day: 'numeric',
+    day:   'numeric',
     month: 'long',
-    year: 'numeric',
+    year:  'numeric',
   });
 }
 
 /* ── Escape HTML (XSS prevention) ───────────────────────── */
 function escapeHtml(str) {
   return String(str)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#039;');
+    .replace(/&/g,  '&amp;')
+    .replace(/</g,  '&lt;')
+    .replace(/>/g,  '&gt;')
+    .replace(/"/g,  '&quot;')
+    .replace(/'/g,  '&#039;');
 }
 
 /* ── Render daftar ucapan ────────────────────────────────── */
@@ -397,15 +397,15 @@ async function renderWishes() {
 
 /* ── Submit ucapan ───────────────────────────────────────── */
 async function handleWishSubmit() {
-  const nameEl = document.getElementById('wish-name');
-  const textEl = document.getElementById('wish-text');
+  const nameEl   = document.getElementById('wish-name');
+  const textEl   = document.getElementById('wish-text');
   const attendEl = document.querySelector('input[name="attend"]:checked');
-  const btn = document.getElementById('wish-submit');
+  const btn      = document.getElementById('wish-submit');
 
   if (!nameEl || !textEl || !btn) return;
 
-  const name = nameEl.value.trim();
-  const message = textEl.value.trim();
+  const name       = nameEl.value.trim();
+  const message    = textEl.value.trim();
   const attendance = attendEl ? attendEl.value : 'Hadir';
 
   /* Validasi */
@@ -423,7 +423,7 @@ async function handleWishSubmit() {
   }
 
   /* Loading */
-  btn.disabled = true;
+  btn.disabled  = true;
   btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i>&nbsp;Mengirim...';
   hideStatus();
 
@@ -450,7 +450,7 @@ async function handleWishSubmit() {
     btn.innerHTML = '<i class="fa-regular fa-paper-plane"></i>&nbsp;Kirim Ucapan';
   } finally {
     setTimeout(function () {
-      btn.disabled = false;
+      btn.disabled  = false;
       btn.innerHTML = '<i class="fa-regular fa-paper-plane"></i>&nbsp;Kirim Ucapan';
     }, 2500);
   }
@@ -482,8 +482,8 @@ function shake(el) {
 
 (function initGallery() {
 
-  var TOTAL_PHOTOS = 17;
-  var ALL_SRCS = [];
+  var TOTAL_PHOTOS   = 17;
+  var ALL_SRCS       = [];
   for (var n = 1; n <= TOTAL_PHOTOS; n++) {
     ALL_SRCS.push('assets/' + n + '.jpg');
   }
@@ -493,22 +493,22 @@ function shake(el) {
   var viewerFromBlur = false; // true jika dibuka dari tombol blur
 
   /* ── Elemen ─────────────────────────────────────────────── */
-  var viewer = null;
-  var viewerImg = null;
-  var viewerClose = null;
-  var viewerBack = null;
-  var viewerPrev = null;
-  var viewerNext = null;
+  var viewer        = null;
+  var viewerImg     = null;
+  var viewerClose   = null;
+  var viewerBack    = null;
+  var viewerPrev    = null;
+  var viewerNext    = null;
   var viewerCounter = null;
 
   /* ── INIT ─────────────────────────────────────────────── */
   function init() {
-    viewer = document.getElementById('lightbox-viewer');
-    viewerImg = document.getElementById('viewer-img');
-    viewerClose = document.getElementById('viewer-close');
-    viewerBack = document.getElementById('viewer-back');
-    viewerPrev = document.getElementById('viewer-prev');
-    viewerNext = document.getElementById('viewer-next');
+    viewer        = document.getElementById('lightbox-viewer');
+    viewerImg     = document.getElementById('viewer-img');
+    viewerClose   = document.getElementById('viewer-close');
+    viewerBack    = document.getElementById('viewer-back');
+    viewerPrev    = document.getElementById('viewer-prev');
+    viewerNext    = document.getElementById('viewer-next');
     viewerCounter = document.getElementById('viewer-counter');
 
     if (!viewer) return;
@@ -538,19 +538,19 @@ function shake(el) {
     });
 
     /* Tombol Kembali → tutup viewer */
-    if (viewerBack) viewerBack.addEventListener('click', closeViewer);
+    if (viewerBack)  viewerBack.addEventListener('click',  closeViewer);
     /* Tombol X → tutup viewer */
-    if (viewerClose) viewerClose.addEventListener('click', closeViewer);
+    if (viewerClose) viewerClose.addEventListener('click',  closeViewer);
     /* Navigasi prev / next */
-    if (viewerPrev) viewerPrev.addEventListener('click', function () { navigate(-1); });
-    if (viewerNext) viewerNext.addEventListener('click', function () { navigate(+1); });
+    if (viewerPrev)  viewerPrev.addEventListener('click',   function () { navigate(-1); });
+    if (viewerNext)  viewerNext.addEventListener('click',   function () { navigate(+1); });
 
     /* Keyboard */
     document.addEventListener('keydown', function (e) {
       if (!viewer || !viewer.classList.contains('is-open')) return;
-      if (e.key === 'ArrowLeft') navigate(-1);
+      if (e.key === 'ArrowLeft')  navigate(-1);
       if (e.key === 'ArrowRight') navigate(+1);
-      if (e.key === 'Escape') closeViewer();
+      if (e.key === 'Escape')     closeViewer();
     });
 
     /* Touch swipe */
@@ -581,8 +581,8 @@ function shake(el) {
     viewerImg.style.opacity = '0.3';
     viewerImg.style.transition = 'opacity 0.2s ease';
 
-    var tmp = new Image();
-    var src = ALL_SRCS[idx];
+    var tmp   = new Image();
+    var src   = ALL_SRCS[idx];
 
     tmp.onload = function () {
       viewerImg.src = src;
@@ -598,12 +598,12 @@ function shake(el) {
 
     /* Redup tombol di ujung */
     if (viewerPrev) {
-      viewerPrev.style.opacity = idx === 0 ? '0.3' : '1';
-      viewerPrev.style.pointerEvents = idx === 0 ? 'none' : 'auto';
+      viewerPrev.style.opacity        = idx === 0 ? '0.3' : '1';
+      viewerPrev.style.pointerEvents  = idx === 0 ? 'none' : 'auto';
     }
     if (viewerNext) {
-      viewerNext.style.opacity = idx === TOTAL_PHOTOS - 1 ? '0.3' : '1';
-      viewerNext.style.pointerEvents = idx === TOTAL_PHOTOS - 1 ? 'none' : 'auto';
+      viewerNext.style.opacity        = idx === TOTAL_PHOTOS - 1 ? '0.3' : '1';
+      viewerNext.style.pointerEvents  = idx === TOTAL_PHOTOS - 1 ? 'none' : 'auto';
     }
   }
 
