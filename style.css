@@ -140,21 +140,20 @@ a   { text-decoration: none; color: inherit; }
   filter: drop-shadow(0 2px 8px rgba(0,0,0,0.18));
 }
 
-/* ── WAYANG dekorasi cover-bottom ──────────────────────────── */
-.cover-wayang {
+/* ── RUMAH dekorasi cover-bottom tengah bawah ───────────────── */
+.cover-rumah {
   position: absolute;
   bottom: 0;
-  width: clamp(121px, 41.4vw, 200px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: clamp(140px, 50vw, 240px);
   height: auto;
   object-fit: contain;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.88;
-  filter: drop-shadow(0 -2px 6px rgba(0,0,0,0.10));
-  transform: translateY(100px);
+  opacity: 0.92;
+  filter: drop-shadow(0 -2px 8px rgba(0,0,0,0.12));
 }
-.cover-wayang--left  { left: 0; }
-.cover-wayang--right { right: 0; left: auto; transform: translateY(100px) scaleX(-1); }
 
 .cover-label {
   position: relative; z-index: 2;
@@ -193,7 +192,7 @@ a   { text-decoration: none; color: inherit; }
   animation: slideUp 0.9s ease both;
   overflow: visible;
 }
-.cover-bottom > *:not(.cover-wayang) {
+.cover-bottom > *:not(.cover-rumah) {
   position: relative;
   z-index: 1;
 }

@@ -1,6 +1,6 @@
 /* ============================================================
    WEDDING INVITATION — script.js
-   Khambali & Yunia | Supabase Integration
+   Triska & Joan | Supabase Integration
    ============================================================
    Project : wtesrckwbscvmdwecusd.supabase.co
    Tabel   : wishes
@@ -12,7 +12,7 @@ const SUPABASE_ANON_KEY = 'sb_publishable__1T0JH76jgChQ_ITRiT7vw_NcwWM4tQ';
 
 /* ── CONFIG UMUM ─────────────────────────────────────────── */
 const CONFIG = {
-  weddingDate:   new Date('2026-05-25T09:00:00'),
+  weddingDate:   new Date('2026-10-31T09:00:00'),
   wishesPerPage: 10,
   tableName:     'wishes',
 };
