@@ -7,8 +7,8 @@
 ============================================================ */
 
 /* ── KONFIGURASI SUPABASE ────────────────────────────────── */
-const SUPABASE_URL      = 'https://wtesrckwbscvmdwecusd.supabase.co';
-const SUPABASE_ANON_KEY = 'sb_publishable__1T0JH76jgChQ_ITRiT7vw_NcwWM4tQ';
+const SUPABASE_URL      = 'https://rriearahyynxxbeoqkrj.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_C03Q5XD14bZSoJQocpp7lQ_tEU1tyTg';
 
 /* ── CONFIG UMUM ─────────────────────────────────────────── */
 const CONFIG = {
