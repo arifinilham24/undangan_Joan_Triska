@@ -48,10 +48,10 @@ document.addEventListener('DOMContentLoaded', function () {
   /* 6. Submit ucapan (event delegation — aman untuk elemen di dalam hidden section) */
   document.addEventListener('click', function (e) {
     if (e.target && e.target.id === 'wish-submit') {
+      // Klik langsung pada tombol
       handleWishSubmit();
-    }
-    // Klik pada ikon di dalam tombol
-    if (e.target && e.target.closest && e.target.closest('#wish-submit')) {
+    } else if (e.target && e.target.closest && e.target.closest('#wish-submit')) {
+      // Klik pada ikon/teks di dalam tombol
       handleWishSubmit();
     }
   });
