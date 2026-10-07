@@ -837,6 +837,37 @@
         </footer>
     </main>
 
+    <!-- ============================================================
+       LIGHTBOX VIEWER — Fullscreen foto viewer
+    ============================================================ -->
+    <div id="lightbox-viewer" class="lightbox-viewer" role="dialog" aria-modal="true" aria-label="Viewer Foto">
+        <!-- Tombol kembali ke grid -->
+        <button class="viewer-back-btn" id="viewer-back" aria-label="Kembali">
+            <i class="fa-solid fa-arrow-left"></i> Kembali
+        </button>
+
+        <!-- Tombol tutup (X) -->
+        <button class="viewer-close" id="viewer-close" aria-label="Tutup">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <!-- Gambar utama -->
+        <div class="viewer-img-wrap">
+            <img id="viewer-img" src="" alt="Foto galeri" />
+        </div>
+
+        <!-- Prev / Next -->
+        <button class="viewer-prev" id="viewer-prev" aria-label="Foto sebelumnya">
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <button class="viewer-next" id="viewer-next" aria-label="Foto berikutnya">
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
+
+        <!-- Counter: n / total -->
+        <p class="viewer-counter" id="viewer-counter">1 / 13</p>
+    </div>
+
     <!-- Music button — fixed, always visible after cover closes -->
     <button id="music-btn" class="music-btn" title="Hentikan Musik" aria-label="Kontrol Musik">
         <span class="music-disc">

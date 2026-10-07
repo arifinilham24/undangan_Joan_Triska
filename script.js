@@ -576,6 +576,12 @@ function shake(el) {
   /* ── OPEN VIEWER ────────────────────────────────────────── */
   function openViewer(idx) {
     if (!viewer) return;
+    /* Jika ALL_SRCS belum terisi (race condition), bangun ulang */
+    if (ALL_SRCS.length === 0) {
+      buildSrcs();
+      TOTAL_PHOTOS = ALL_SRCS.length;
+    }
+    if (TOTAL_PHOTOS === 0) return; // tidak ada foto sama sekali
     currentIndex = Math.max(0, Math.min(idx, TOTAL_PHOTOS - 1));
     loadImage(currentIndex);
     viewer.classList.add('is-open');
