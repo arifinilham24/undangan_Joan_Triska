@@ -473,8 +473,8 @@ function shake(el) {
 
 /* ============================================================
    GALLERY — VIEWER LANGSUNG (klik blur → fullscreen viewer)
-   17 foto total : assets/1.jpg … assets/17.jpg
-   Grid utama   : foto 1–7 normal, foto ke-8 = blur overlay +9
+   13 foto total : assets/1.jpg, 2.jpg, 7.jpg, 5.jpg, 6.jpg, 03.jpg, 8.jpg–14.jpg
+   Grid utama   : 7 foto tampil, foto ke-8 = blur overlay +6
    Klik blur    : langsung buka viewer mulai foto ke-8
    Klik foto 1–7: langsung buka viewer mulai foto tersebut
    Viewer       : fullscreen, tombol Kembali + prev/next + swipe
@@ -482,11 +482,22 @@ function shake(el) {
 
 (function initGallery() {
 
-  var TOTAL_PHOTOS   = 17;
-  var ALL_SRCS       = [];
-  for (var n = 1; n <= TOTAL_PHOTOS; n++) {
-    ALL_SRCS.push('assets/' + n + '.jpg');
+  /* Bangun ALL_SRCS dari semua gallery-item (termasuk yang hidden)
+     berurutan sesuai data-index */
+  var ALL_SRCS = [];
+  function buildSrcs() {
+    var items = document.querySelectorAll('#gallery-grid .gallery-item[data-src]');
+    var arr   = [];
+    items.forEach(function (el) {
+      var idx = parseInt(el.getAttribute('data-index'), 10);
+      var src = el.getAttribute('data-src');
+      if (!isNaN(idx) && src) arr.push({ idx: idx, src: src });
+    });
+    arr.sort(function (a, b) { return a.idx - b.idx; });
+    ALL_SRCS = arr.map(function (o) { return o.src; });
   }
+
+  var TOTAL_PHOTOS = 13; // diperbarui sesuai jumlah foto
 
   /* ── State ─────────────────────────────────────────────── */
   var currentIndex = 0;
@@ -503,6 +514,10 @@ function shake(el) {
 
   /* ── INIT ─────────────────────────────────────────────── */
   function init() {
+    /* Bangun array sumber foto dari DOM */
+    buildSrcs();
+    TOTAL_PHOTOS = ALL_SRCS.length;
+
     viewer        = document.getElementById('lightbox-viewer');
     viewerImg     = document.getElementById('viewer-img');
     viewerClose   = document.getElementById('viewer-close');
@@ -517,18 +532,19 @@ function shake(el) {
        Pakai document-level listener agar tidak terpengaruh AOS
        yang bisa set pointer-events:none sebelum animasi selesai */
     document.addEventListener('click', function (e) {
-      /* Klik pada foto blur / overlay-nya */
-      var moreItem = e.target.closest('#gallery-more-btn');
+      /* Klik pada foto blur / overlay-nya — cek id atau class */
+      var moreItem = e.target.closest('#gallery-more-trigger') ||
+                     e.target.closest('.gallery-item--more');
       if (moreItem) {
         e.preventDefault();
         e.stopPropagation();
         viewerFromBlur = true;
-        openViewer(7);
+        openViewer(6); // mulai dari foto ke-7 (index 6 = foto 8.jpg)
         return;
       }
 
-      /* Klik pada foto normal di grid (1–7) */
-      var gridItem = e.target.closest('#gallery-grid .gallery-item:not(.gallery-item--more)');
+      /* Klik pada foto normal di grid (tidak pada item--more) */
+      var gridItem = e.target.closest('#gallery-grid .gallery-item:not(.gallery-item--more):not(.gallery-item--hidden)');
       if (gridItem) {
         var idx = parseInt(gridItem.getAttribute('data-index'), 10);
         viewerFromBlur = false;

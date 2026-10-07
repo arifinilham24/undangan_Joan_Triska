@@ -521,9 +521,9 @@
   ============================================================ -->
     <main id="invitation" class="hidden">
 
-        <!-- Audio: Rajo Ratu Sahari - Aldi Viorell & Nita Viorell -->
+        <!-- Audio: Background Music -->
         <audio id="bg-music" loop>
-            <source src="assets/rajo_ratu_sahari.mp3" type="audio/mpeg" />
+            <source src="assets/background_music.mp3" type="audio/mpeg" />
         </audio>
 
         <!-- ── QUOTE ── -->
@@ -670,8 +670,8 @@
             </div>
 
             <!--
-        Total foto  : 7 (assets/1.jpg, 2.jpg, 7.jpg, 5.jpg, 6.jpg, 03.jpg, 8.jpg)
-        Tampil awal : 7 foto
+        Total foto  : 13 (assets/1.jpg, 2.jpg, 7.jpg, 5.jpg, 6.jpg, 03.jpg, 8.jpg, 9.jpg, 10.jpg, 11.jpg, 12.jpg, 13.jpg, 14.jpg)
+        Tampil awal : 7 foto + "more" overlay
       -->
             <div class="gallery-grid" id="gallery-grid">
 
@@ -704,10 +704,23 @@
                     <img src="assets/03.jpg" alt="Foto 7" loading="lazy" />
                 </div>
 
-                <div class="gallery-item" data-aos="fade-up" data-aos-delay="350" data-index="6"
-                    data-src="assets/8.jpg">
+                <!-- Foto ke-7: dengan overlay "+ lebih banyak foto" -->
+                <div class="gallery-item gallery-item--more" data-aos="fade-up" data-aos-delay="350" data-index="6"
+                    data-src="assets/8.jpg" id="gallery-more-trigger">
                     <img src="assets/8.jpg" alt="Foto 8" loading="lazy" />
+                    <div class="gallery-more-overlay" id="gallery-more-overlay">
+                        <span class="gallery-more-count">+6</span>
+                        <span class="gallery-more-label">Lihat Semua</span>
+                    </div>
                 </div>
+
+                <!-- Foto tersembunyi (hanya muncul di lightbox) -->
+                <div class="gallery-item gallery-item--hidden" data-index="7" data-src="assets/9.jpg" style="display:none;"></div>
+                <div class="gallery-item gallery-item--hidden" data-index="8" data-src="assets/10.jpg" style="display:none;"></div>
+                <div class="gallery-item gallery-item--hidden" data-index="9" data-src="assets/11.jpg" style="display:none;"></div>
+                <div class="gallery-item gallery-item--hidden" data-index="10" data-src="assets/12.jpg" style="display:none;"></div>
+                <div class="gallery-item gallery-item--hidden" data-index="11" data-src="assets/13.jpg" style="display:none;"></div>
+                <div class="gallery-item gallery-item--hidden" data-index="12" data-src="assets/14.jpg" style="display:none;"></div>
 
             </div>
         </section>
@@ -829,7 +842,7 @@
         <span class="music-disc">
             <i class="fa-solid fa-music"></i>
         </span>
-        <span class="music-label">Rajo Ratu Sahari</span>
+        <span class="music-label">Urang Minang Baralek Gadang</span>
     </button>
 
     <!-- ============================================================
